@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0e1110" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%238e2518'/%3E%3Crect x='5' y='5' width='54' height='54' fill='none' stroke='%23e4c785' stroke-width='2'/%3E%3Cpath d='M16 45 32 14l16 31z' fill='%23e4c785'/%3E%3Cpath d='M21 43h22M26 33h12M23 38h18' stroke='%238e2518' stroke-width='2'/%3E%3C/svg%3E"
+    />
+    <title>太和殿 · Hall of Supreme Harmony</title>
+    <meta
+      name="description"
+      content="以 Three.js 构建的紫禁城太和殿实时三维场景，可自由环视，并体验不同时辰的光影。"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <main id="app">
+      <canvas id="scene" aria-label="可交互的太和殿三维场景" role="img"></canvas>
+
+      <div class="atmosphere" aria-hidden="true"></div>
+
+      <header class="masthead">
+        <div class="seal" aria-hidden="true">
+          <span>故宫</span>
+        </div>
+        <div class="title-lockup">
+          <p class="eyebrow">THE FORBIDDEN CITY <span>·</span> 明永乐十八年</p>
+          <h1>太和殿</h1>
+          <p class="latin">HALL OF SUPREME HARMONY</p>
+        </div>
+      </header>
+
+      <div class="north-mark" aria-hidden="true">
+        <span class="line"></span>
+        <span class="north">N</span>
+        <span class="line"></span>
+        <small>中轴 · 紫禁城</small>
+      </div>
+
+      <aside class="scene-note">
+        <p class="note-index">壹</p>
+        <div>
+          <p class="note-title">重檐庑殿顶</p>
+          <p class="note-copy">十一间五进 · 金扉朱楹<br />御路三台 · 云龙石雕</p>
+        </div>
+      </aside>
+
+      <section class="control-dock" aria-label="场景控制">
+        <div class="dock-topline">
+          <span>观 <i>·</i> 览</span>
+          <span class="hairline"></span>
+          <span id="sun-readout">暮春 · 申时</span>
+        </div>
+
+        <div class="dock-main">
+          <div class="view-control">
+            <p class="control-label">观看角度</p>
+            <div class="view-buttons" role="group" aria-label="选择观看角度">
+              <button type="button" data-view="front" aria-pressed="false">正面</button>
+              <button type="button" data-view="corner" class="active" aria-pressed="true">侧景</button>
+              <button type="button" data-view="profile" aria-pressed="false">东侧</button>
+              <button type="button" data-view="aerial" aria-pressed="false">鸟瞰</button>
+            </div>
+          </div>
+
+          <div class="dock-divider" aria-hidden="true"></div>
+
+          <div class="light-control">
+            <p class="control-label">日影</p>
+            <div class="light-buttons" role="group" aria-label="选择时辰">
+              <button type="button" data-light="morning" aria-pressed="false">晨光</button>
+              <button type="button" data-light="noon" aria-pressed="false">正午</button>
+              <button type="button" data-light="dusk" class="active" aria-pressed="true">斜阳</button>
+            </div>
+          </div>
+
+          <div class="dock-divider" aria-hidden="true"></div>
+
+          <div class="toggle-control">
+            <button type="button" id="auto-rotate" class="toggle" aria-pressed="false">
+              <span class="toggle-icon" aria-hidden="true">↻</span>
+              <span>环视</span>
+            </button>
+            <button type="button" id="shadow-toggle" class="toggle is-on" aria-pressed="true">
+              <span class="toggle-icon shadow-icon" aria-hidden="true"></span>
+              <span>阴影</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="timeline">
+          <span class="timeline-mark">卯</span>
+          <input
+            id="time-slider"
+            type="range"
+            min="7"
+            max="17.8"
+            step="0.05"
+            value="16.55"
+            aria-label="调整一天中的时间"
+          />
+          <span class="timeline-mark">酉</span>
+          <output id="time-output" for="time-slider">16:33</output>
+        </div>
+      </section>
+
+      <p class="interaction-hint">
+        <span>拖动旋转</span><i></i><span>滚轮缩放</span><i></i><span>右键平移</span>
+      </p>
+
+      <div class="credits">THREE.JS · 实时日光与软阴影</div>
+
+      <div id="loader" class="loader" role="status" aria-live="polite">
+        <div class="loader-inner">
+          <div class="loader-seal">太和</div>
+          <p class="loader-title">晨光入殿</p>
+          <div class="loader-track"><span id="loader-bar"></span></div>
+          <p class="loader-copy">正在铺陈金瓦与丹墀</p>
+        </div>
+      </div>
+
+      <div id="webgl-error" class="webgl-error" hidden>
+        <p>当前浏览器无法启用 WebGL 2。</p>
+        <p>请使用较新的 Chrome、Safari 或 Edge 浏览器重新打开此页面。</p>
+      </div>
+    </main>
+  </body>
+</html>

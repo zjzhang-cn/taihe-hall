@@ -1,0 +1,17 @@
+{
+  "name": "taihe-hall",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Taihe Hall (Hall of Supreme Harmony) — a real-time Three.js scene of the Forbidden City",
+  "scripts": {
+    "build": "esbuild src/main.js --bundle --minify --outfile=app.js",
+    "watch": "esbuild src/main.js --bundle --outfile=app.js --watch",
+    "serve": "python3 -m http.server 5173"
+  },
+  "dependencies": {
+    "three": "0.180.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.11"
+  }
+}
